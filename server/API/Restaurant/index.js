@@ -1,4 +1,4 @@
-import { RestaurantModel } from "../../database/restaurant";
+import { RestaurantModel } from "../../database/allModels";
 
 const Router = express.Router();
 
@@ -52,15 +52,15 @@ Access          Public
 Method          GET
 */
 
-Router.get("/search", async(req,res) =>{
-    try{
-        const {searchString} = req.body;
+Router.get("/search", async (req, res) => {
+    try {
+        const { searchString } = req.body;
 
         const restaurants = await RestaurantModel.find({
-            name: {$regex: searchString, $option: "i"},
+            name: { $regex: searchString, $option: "i" },
         });
-    }catch(error){
-        return res.status(500).json({ error: error.message});
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
     }
 });
 
